@@ -1,0 +1,4 @@
+node_modules
+dist/fractal.wasm
+dist/fractal.js
+.DS_STORE
