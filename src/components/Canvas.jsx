@@ -1,5 +1,4 @@
 import React from 'react';
-import mandelIter from '../util/mandelIter';
 
 const createWebAssembly = async (path, importObject) => {
   const result = await window.fetch(path);
@@ -34,8 +33,7 @@ class Canvas extends React.Component {
 
   async componentDidMount() {
     const exports = await init();
-    const mandelIterWASM = exports.__z10mandelIterffi;
-
+    const mandelIterWASM = exports.__Z10mandelIterffi;
     const canvas = this.canvasRef.current.getContext('2d');
     const mag = 200;
     const panX = 2;
@@ -44,7 +42,7 @@ class Canvas extends React.Component {
 
     for (let x = 10; x < this.props.height; x++)  {
       for (let y = 10; y < this.props.width; y++)  {
-        let m = mandelIter(x/mag - panX, y/mag - panY, maxIter);
+        let m = mandelIterWASM(x/mag - panX, y/mag - panY, maxIter);
         canvas.fillStyle = (m === 0) ? '#000' : 'hsl(0, 100%, ' + m + '%)'; 
         canvas.fillRect(x, y, 1,1);
       }
