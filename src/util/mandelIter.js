@@ -1,14 +1,27 @@
+/**
+ * Performs a set number of iterations applying the function f(z) = z^2 + c
+ * on the previous result. https://en.wikipedia.org/wiki/Mandelbrot_set
+ * f(z) = z^2 + c
+ * f(z') = f(z)
+ * f(z'') = f(z')
+ *
+ * @param {number} x x coordinate of the point
+ * @param {number} y y coordinate of the point
+ * @param {number} maxIter maximum number of iterations
+ *
+ * @return {number} number (0) represents the color black
+ */
 const mandelIter = (x, y, maxIter) => {
-  let r = x;
-  let i = y;
+  let real = x;
+  let imaginary = y;
   for (let a = 0; a < maxIter; a++) {
-    let tmpr = r * r - i * i + x;
-    let tmpi = 2 * r * i + y;
+    let tmpReal = real * real - imaginary * imaginary + x;
+    let tmpImaginary = 2 * real * imaginary + y;
 
-    r = tmpr;
-    i = tmpi;
+    real = tmpReal;
+    imaginary = tmpImaginary;
 
-    if (r * i > 5) {
+    if (real * imaginary > 5) {
       return a/maxIter * 100;
     }
   }
